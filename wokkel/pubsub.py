@@ -818,6 +818,25 @@ class PubSubClient(XMPPHandler):
         return request.send(self.xmlstream)
 
 
+    def retract(self, service, nodeIdentifier, itemIdentifiers=None, sender=None):
+        """
+        Retract items from a publish subscribe node.
+
+        @param service: The publish subscribe service that keeps the node.
+        @type service: L{JID}
+        @param nodeIdentifier: The identifier of the node.
+        @type nodeIdentifier: C{unicode}
+        @param itemIdentifiers: Optional list of item item identifiers to retract.
+        @type itemIdentifiers: C{list}
+        """
+        request = PubSubRequest('retract')
+        request.recipient = service
+        request.nodeIdentifier = nodeIdentifier
+        request.itemIdentifiers = itemIdentifiers
+        request.sender = sender
+        return request.send(self.xmlstream)
+            
+            
     def items(self, service, nodeIdentifier, maxItems=None, sender=None):
         """
         Retrieve previously published items from a publish subscribe node.
