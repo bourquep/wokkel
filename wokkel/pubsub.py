@@ -438,7 +438,11 @@ class PubSubRequest(generic.Stanza):
 
     def _render_configure(self, verbElement):
         if self.options:
-            verbElement.addChild(self.options.toElement())
+            if verbElement.name == 'configure':
+                element = verbElement
+            else:
+                element = verbElement.parent.addElement('configure')
+            element.addChild(self.options.toElement())
 
 
     def _parse_options(self, verbElement):
