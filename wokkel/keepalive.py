@@ -7,7 +7,7 @@ class KeepAlive(XMPPHandler):
 
     interval = 300
     lc = None
-    logPings = False
+    logPings = True
 
     def connectionInitialized(self):
         self.lc = task.LoopingCall(self.ping)
